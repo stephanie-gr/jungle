@@ -107,14 +107,14 @@ RSpec.describe User, type: :model do
     it 'signs the user in if they have valid credentials AND typed their email in the wrong case' do
       user = User.new
 
-      user.name = "Beyonce Knowles"
-      user.email = "        destinyschild@gmail.com"
-      user.password = "beyonce123"
-      user.password_confirmation = "beyonce123"
+      user.name = "Another Person"
+      user.email = "anotheremail@gmail.com"
+      user.password = "okokokokokokokok"
+      user.password_confirmation = "okokokokokokokok"
 
       user.save
 
-      expect(user.authenticate_with_credentials(user.email, user.password)).to eq(user)
+      expect(user.authenticate_with_credentials("ANOTHERemail@gmail.com", user.password)).to eq(user)
     end
 
   end
