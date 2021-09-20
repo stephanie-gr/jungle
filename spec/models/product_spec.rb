@@ -52,9 +52,37 @@ RSpec.describe Product, type: :model do
       expect(product.errors.full_messages)
     end
 
-    it "is not valid without a quantity"
-    it "is not valid without a category"
+    it "is not valid without a quantity" do
+      product = Product.new
+      category = Category.new
 
+      category.name = "Clothing"
+      category.id = 4
+
+      product.name = "Hazelnut"
+      product.price_cents = 600
+      product.quantity = nil
+      product.category_id = category.id
+      product.category = category
+      expect(product).to_not be_valid
+      expect(product.errors.full_messages)
+    end
+
+    it "is not valid without a category" do
+      product = Product.new
+      category = Category.new
+
+      category.name = "Clothing"
+      category.id = 4
+
+      product.name = "Hazelnut"
+      product.price_cents = 5000000000
+      product.quantity = 1
+      product.category_id = category.id
+      product.category = nil;
+      expect(product).to_not be_valid
+      expect(product.errors.full_messages)
+    end
 
   end
 end
