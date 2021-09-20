@@ -5,18 +5,13 @@ RSpec.describe User, type: :model do
   describe 'Validations' do
 
     it "is valid with valid attributes" do
-      product = Product.new
-      category = Category.new
+      user = User.new
 
-      category.name = "Clothing"
-      category.id = 4
-
-      product.name = "Anything"
-      product.price_cents = 50000000
-      product.quantity = 1
-      product.category_id = category.id
-      product.category = category
-      expect(product).to be_valid
+      user.name = "Mo Salah"
+      user.email = "msalah@gmail.com"
+      user.password = "123ImTheBest"
+      user.password_confirmation = "123ImTheBest"
+      expect(user).to be_valid
     end
   
   end
