@@ -75,4 +75,21 @@ RSpec.describe User, type: :model do
     end
   
   end
+
+  describe '.authenticate_with_credentials' do
+    
+    it 'signs the user in if they have valid credentials' do
+      user = User.new
+
+      user.name = "Mo Salah"
+      user.email = "msalah@gmail.com"
+      user.password = "123ImTheBest"
+      user.password_confirmation = "123ImTheBest"
+
+      user.save
+
+      expect(user.authenticate_with_credentials(user.email, user.password)).to eq(user)
+    end
+
+  end
 end
