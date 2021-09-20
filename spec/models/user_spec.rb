@@ -63,6 +63,16 @@ RSpec.describe User, type: :model do
       user.password_confirmation = "123ImTheBest"
       expect(user).to_not be_valid
     end
+
+    it "is not valid without a password of at least 8 characters" do
+      user = User.new
+
+      user.name = "Mo Salah"
+      user.email = "msalah@gmail.com"
+      user.password = "123"
+      user.password_confirmation = "123"
+      expect(user).to_not be_valid
+    end
   
   end
 end
