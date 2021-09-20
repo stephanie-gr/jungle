@@ -91,5 +91,31 @@ RSpec.describe User, type: :model do
       expect(user.authenticate_with_credentials(user.email, user.password)).to eq(user)
     end
 
+    it 'signs the user in if they haave valid credentials AND typed their email with trailing or leading whitespace' do
+      user = User.new
+
+      user.name = "Beyonce Knowles"
+      user.email = "destinyschild@gmail.com"
+      user.password = "beyonce123"
+      user.password_confirmation = "beyonce123"
+
+      user.save
+
+      expect(user.authenticate_with_credentials('     destinyschild@gmail.com', user.password)).to eq(user)
+    end
+
+    it 'signs the user in if they have valid credentials AND typed their email in the wrong case' do
+      user = User.new
+
+      user.name = "Beyonce Knowles"
+      user.email = "        destinyschild@gmail.com"
+      user.password = "beyonce123"
+      user.password_confirmation = "beyonce123"
+
+      user.save
+
+      expect(user.authenticate_with_credentials(user.email, user.password)).to eq(user)
+    end
+
   end
 end
